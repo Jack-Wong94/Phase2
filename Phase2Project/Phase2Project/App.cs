@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Xamarin.Facebook;
+using Xamarin.Facebook.Login.Widget;
 using Xamarin.Forms;
 
 namespace Phase2Project
@@ -12,19 +13,10 @@ namespace Phase2Project
         public App()
         {
             // The root page of your application
-            var content = new ContentPage
+            var content = new HomePage
             {
-                Title = "Phase2Project",
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
+                Title = "Hello World"
+
             };
 
             MainPage = new NavigationPage(content);
@@ -46,3 +38,4 @@ namespace Phase2Project
         }
     }
 }
+
