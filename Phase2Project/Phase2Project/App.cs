@@ -13,6 +13,7 @@ namespace Phase2Project
         public App()
         {
             // The root page of your application
+
             var content = new HomePage
             {
                 Title = "Emotional Food"

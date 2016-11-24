@@ -18,6 +18,7 @@ namespace Phase2Project
         {
             
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
             this._emotionModel = _emotionModel;
             this.profile = profile;
             var image = new Image { Aspect = Aspect.AspectFit };

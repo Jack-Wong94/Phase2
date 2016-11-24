@@ -48,6 +48,10 @@ namespace Phase2Project
         {
             return await this.profileTable.ToListAsync();
         }
+        public async Task<List<EmotionModel>> GetEmotionModelTimelines()
+        {
+            return await emotionTable.ToListAsync();
+        }
     }
 }
 

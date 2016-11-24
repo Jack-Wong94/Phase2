@@ -18,18 +18,27 @@ namespace Phase2Project
     {
         FaceBookModel profile;
         Button button;
+        Button button2;
         public MainPage(FaceBookModel profile)
         {
             InitializeComponent();
+            
             this.profile = profile;
             var layout = new StackLayout { Padding = new Thickness(5, 10) };
             this.Content = layout;
             var label = new Label { Text = "Welcome "+profile.Name, TextColor = Color.FromHex("#77d065"), FontSize = 20 };
             button = new Button { Text = "Take a photo", BackgroundColor =Color.Silver, TextColor = Color.White, BorderRadius = 0};
+            button2 = new Button { Text = "Get the past order", BackgroundColor = Color.Silver, TextColor = Color.White, BorderRadius = 0 };
             button.Clicked += TakePicture_Clicked;
+            button2.Clicked += ChangeToPreviousOrderPage;
             layout.Children.Add(label);
             layout.Children.Add(button);
+            layout.Children.Add(button2);
 
+        }
+        private async void ChangeToPreviousOrderPage(object sender, System.EventArgs e)
+        {
+            await Navigation.PushAsync(new PreviousOrderPage());
         }
         private async void ChangeToFoodPage(EmotionModel _emotionModel)
         {
@@ -49,6 +58,7 @@ namespace Phase2Project
             if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
             {
                 button.IsEnabled = false;
+                button2.IsEnabled = false;
                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
                     DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front,
@@ -59,7 +69,12 @@ namespace Phase2Project
                 });
 
                 if (file == null)
+                {
+                    button.IsEnabled = true;
+                    button2.IsEnabled = true;
                     return;
+                }
+                    
                 try
                 {
                     
@@ -80,6 +95,8 @@ namespace Phase2Project
                         updateTime = DateTime.Now.ToString()
                     };
                     ChangeToFoodPage(model);
+                    button.IsEnabled = true;
+                    button2.IsEnabled = true;
                 }
 
                 catch (Exception ex)
