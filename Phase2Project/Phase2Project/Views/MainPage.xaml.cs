@@ -17,6 +17,7 @@ namespace Phase2Project
     public partial class MainPage : ContentPage
     {
         FaceBookModel profile;
+        
         public MainPage(FaceBookModel profile)
         {
             InitializeComponent();
@@ -30,9 +31,9 @@ namespace Phase2Project
             layout.Children.Add(button);
 
         }
-        private async void ChangePage()
+        private async void ChangeToFoodPage(EmotionModel _emotionModel)
         {
-            await Navigation.PushAsync(new MainPage(profile));
+            await Navigation.PushAsync(new FoodPage(_emotionModel));
         }
         private async void TakePicture_Clicked(object sender, System.EventArgs e)
         {
@@ -75,7 +76,7 @@ namespace Phase2Project
                     //EmotionView.ItemsSource = temp.ToRankedList();
                     var clientEmotion = temp.ToRankedList().First().Key;
 
-                    EmotionModel emo = new EmotionModel()
+                    EmotionModel model = new EmotionModel()
                     {
                         Name = profile.Name,
                         Emotion = clientEmotion,
@@ -83,7 +84,8 @@ namespace Phase2Project
                     };
                     try
                     {
-                        await AzureManager.AzureManagerInstance.AddTimeLine(emo);
+                        await AzureManager.AzureManagerInstance.AddTimeLine(model);
+                        ChangeToFoodPage(model);
                     }
                     catch (Microsoft.WindowsAzure.MobileServices.MobileServiceConflictException) { }
                     /*image.Source = ImageSource.FromStream(() =>
