@@ -18,6 +18,7 @@ namespace Phase2Project
         public PreviousOrderPage(FaceBookModel profile)
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
             this.profile = profile;
             Name = profile.Name;
             ShowPreviousOrder();
