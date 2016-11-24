@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Phase2Project;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
+//This Page is used to confirm if the client wants to order the dishes
+//Author: Long-Sing Wong
 namespace Phase2Project
 {
     public partial class FoodPage : ContentPage
@@ -14,6 +10,8 @@ namespace Phase2Project
         FaceBookModel profile;
         Button button;
         Label label;
+
+        //basic layout of the page
         public FoodPage(EmotionModel _emotionModel,FaceBookModel profile)
         {
             
@@ -23,6 +21,8 @@ namespace Phase2Project
             this.profile = profile;
             var image = new Image { Aspect = Aspect.AspectFit };
             var layout = new StackLayout { Padding = new Thickness(5, 10) };
+            
+            //preview of the dishes based on the emotion
             if (_emotionModel.Emotion.ToLower() == "happiness")
             {
                 
@@ -85,6 +85,8 @@ namespace Phase2Project
 
 
         }
+
+        //The method to send the order to the EmotionModel easy table to store the order. Using HTTP PUT method
         private async void SendOrder(object sender, System.EventArgs e)
         {
             try
@@ -96,6 +98,8 @@ namespace Phase2Project
             }
             catch (Microsoft.WindowsAzure.MobileServices.MobileServiceConflictException) { }
         }
+
+        //Once order has been sent, change it back to main page.
         private async void ChangeToMainPage()
         {
             await Navigation.PushAsync(new MainPage(profile));

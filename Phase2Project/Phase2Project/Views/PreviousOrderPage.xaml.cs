@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using Xamarin.Forms;
 
+//Get the order made by the client previously.
+//Author: Long-Sing Wong
 namespace Phase2Project
 {
-    
+
     public partial class PreviousOrderPage : ContentPage
     {
         FaceBookModel profile;
         string Name;
         List<EmotionModel> emotionList = new List<EmotionModel> { };
         List<string> dateList = new List<string> { };
+
+        //Show the list view of the order
         public PreviousOrderPage(FaceBookModel profile)
         {
             InitializeComponent();
@@ -24,10 +24,10 @@ namespace Phase2Project
 
            
         }
+        //method to show the list based on the time it made.
         private async void ShowPreviousOrder()
         {
             emotionList = await AzureManager.AzureManagerInstance.GetEmotionModelTimelines(profile.id);
-
             foreach (EmotionModel model in emotionList)
             {
                 dateList.Add(model.updateTime + "     "+"Order food of "+model.Emotion);
@@ -41,6 +41,7 @@ namespace Phase2Project
             }
             OrderListView.ItemSelected += OnSelection;
         }
+        //When client select an item, pop up shows.
         private void OnSelection(object sender,SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)

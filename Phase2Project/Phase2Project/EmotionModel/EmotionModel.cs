@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+
+//EmotionModel contains the information about user name and facebookId.
+//The primary key of the table is id but using a foreign key which is facebookId from FaceBookModel.
+//Using foreign key helps to retrieve data from the database since facebookId is unique.
+//Author: Long-Sing Wong
 namespace Phase2Project
 {
     public class EmotionModel

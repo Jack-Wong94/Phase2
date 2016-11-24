@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+
+//The client profile model
+//Author: Long-Sing Wong
 namespace Phase2Project
 {
+    //attribute that should be included in the easy table
     public class FaceBookModel
     {
         [JsonProperty(PropertyName = "Name")]
@@ -19,8 +18,6 @@ namespace Phase2Project
 
         [JsonProperty(PropertyName = "gender")]
         public string gender { get; set; }
-
-        
         
         
     }

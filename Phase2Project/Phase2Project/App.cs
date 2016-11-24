@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xamarin.Facebook;
-using Xamarin.Facebook.Login.Widget;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
+//app logic
+//Author: Long-Sing Wong
 namespace Phase2Project
 {
     public class App : Application
