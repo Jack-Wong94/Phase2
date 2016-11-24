@@ -48,6 +48,7 @@ namespace Phase2Project
             }
             if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
             {
+                button.IsEnabled = false;
                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
                     DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front,
@@ -61,19 +62,15 @@ namespace Phase2Project
                     return;
                 try
                 {
-
+                    
                     string emotionKey = "ff39772d2a764944a93eee520503eb4b";
 
                     EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
-                    button.IsEnabled = false;
-                    var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
                     
-
-                    UploadingIndicator.IsRunning = true;
+                    var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
 
                     var temp = emotionResults[0].Scores;
-                    
-                    //EmotionView.ItemsSource = temp.ToRankedList();
+
                     var clientEmotion = temp.ToRankedList().First().Key;
 
                     EmotionModel model = new EmotionModel()
@@ -83,14 +80,8 @@ namespace Phase2Project
                         updateTime = DateTime.Now.ToString()
                     };
                     ChangeToFoodPage(model);
-                   
-                    /*image.Source = ImageSource.FromStream(() =>
-                    {
-                        var stream = file.GetStream();
-                        file.Dispose();
-                        return stream;
-                    });*/
                 }
+
                 catch (Exception ex)
                 {
                     errorLabel.Text = ex.Message;
