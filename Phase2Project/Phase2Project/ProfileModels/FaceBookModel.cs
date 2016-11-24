@@ -20,8 +20,7 @@ namespace Phase2Project
         [JsonProperty(PropertyName = "gender")]
         public string gender { get; set; }
 
-        [JsonProperty(PropertyName = "FaceBookId")]
-        public string facebookId { get; set; }
+        
         
         
     }

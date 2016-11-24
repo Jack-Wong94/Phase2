@@ -48,9 +48,9 @@ namespace Phase2Project
         {
             return await this.profileTable.ToListAsync();
         }
-        public async Task<List<EmotionModel>> GetEmotionModelTimelines()
+        public async Task<List<EmotionModel>> GetEmotionModelTimelines(string id)
         {
-            return await emotionTable.ToListAsync();
+            return await emotionTable.Where(model => model.facebookId == id).ToListAsync();
         }
     }
 }

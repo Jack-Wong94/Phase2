@@ -19,7 +19,22 @@ namespace Phase2Project
         public HomePage()
         {
             InitializeComponent();
+            var layout = new StackLayout { Padding = new Thickness(5, 10) };
+            this.Content = layout;
+            var label = new Label
+            {   Text = "Welcome to Fabrikam food! We have invented different crusine that fits your emotions. Simply take a selfie and order the dishes",
+                TextColor = Color.FromHex("#77d065"),
+                FontSize = 20
 
+            };
+            var button = new Button
+            {
+                Text = "Login using Facebook",
+                BackgroundColor = Color.Silver
+            };
+            button.Clicked += Login;
+            layout.Children.Add(label);
+            layout.Children.Add(button);
         }
         private void Login(object sender, System.EventArgs e)
         {

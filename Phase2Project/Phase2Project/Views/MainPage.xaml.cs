@@ -38,7 +38,7 @@ namespace Phase2Project
         }
         private async void ChangeToPreviousOrderPage(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new PreviousOrderPage());
+            await Navigation.PushAsync(new PreviousOrderPage(profile));
         }
         private async void ChangeToFoodPage(EmotionModel _emotionModel)
         {
@@ -92,7 +92,8 @@ namespace Phase2Project
                     {
                         Name = profile.Name,
                         Emotion = clientEmotion,
-                        updateTime = DateTime.Now.ToString()
+                        updateTime = DateTime.Now.ToString(),
+                        facebookId = profile.id
                     };
                     ChangeToFoodPage(model);
                     button.IsEnabled = true;
