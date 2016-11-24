@@ -38,7 +38,7 @@
     <Compile Include="App.cs" />
     <Compile Include="AzureManager\AzureManager.cs" />
     <Compile Include="EmotionModel\EmotionModel.cs" />
-    <Compile Include="FoodPage.xaml.cs">
+    <Compile Include="Views\FoodPage.xaml.cs">
       <DependentUpon>FoodPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
@@ -129,7 +129,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FoodPage.xaml">
+    <EmbeddedResource Include="Views\FoodPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

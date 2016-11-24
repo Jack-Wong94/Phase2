@@ -15,7 +15,7 @@ namespace Phase2Project
             // The root page of your application
             var content = new HomePage
             {
-                Title = "Hello World"
+                Title = "Emotional Food"
 
             };
 

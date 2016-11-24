@@ -44,7 +44,7 @@ namespace Phase2Project
         {
             await emotionTable.InsertAsync(timeline);
         }
-        public async Task<List<FaceBookModel>> GetTimelines()
+        public async Task<List<FaceBookModel>> GetProfileTimelines()
         {
             return await this.profileTable.ToListAsync();
         }

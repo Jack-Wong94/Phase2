@@ -17,7 +17,7 @@ namespace Phase2Project
     public partial class MainPage : ContentPage
     {
         FaceBookModel profile;
-        
+        Button button;
         public MainPage(FaceBookModel profile)
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace Phase2Project
             var layout = new StackLayout { Padding = new Thickness(5, 10) };
             this.Content = layout;
             var label = new Label { Text = "Welcome "+profile.Name, TextColor = Color.FromHex("#77d065"), FontSize = 20 };
-            var button = new Button { Text = "Take a photo", BackgroundColor =Color.FromHex("A6E55E"), TextColor = Color.White, BorderRadius = 0};
+            button = new Button { Text = "Take a photo", BackgroundColor =Color.Silver, TextColor = Color.White, BorderRadius = 0};
             button.Clicked += TakePicture_Clicked;
             layout.Children.Add(label);
             layout.Children.Add(button);
@@ -33,7 +33,7 @@ namespace Phase2Project
         }
         private async void ChangeToFoodPage(EmotionModel _emotionModel)
         {
-            await Navigation.PushAsync(new FoodPage(_emotionModel));
+            await Navigation.PushAsync(new FoodPage(_emotionModel,profile));
         }
         private async void TakePicture_Clicked(object sender, System.EventArgs e)
         {
@@ -65,11 +65,11 @@ namespace Phase2Project
                     string emotionKey = "ff39772d2a764944a93eee520503eb4b";
 
                     EmotionServiceClient emotionClient = new EmotionServiceClient(emotionKey);
-
+                    button.IsEnabled = false;
                     var emotionResults = await emotionClient.RecognizeAsync(file.GetStream());
                     
 
-                    UploadingIndicator.IsRunning = false;
+                    UploadingIndicator.IsRunning = true;
 
                     var temp = emotionResults[0].Scores;
                     
@@ -82,12 +82,8 @@ namespace Phase2Project
                         Emotion = clientEmotion,
                         updateTime = DateTime.Now.ToString()
                     };
-                    try
-                    {
-                        await AzureManager.AzureManagerInstance.AddTimeLine(model);
-                        ChangeToFoodPage(model);
-                    }
-                    catch (Microsoft.WindowsAzure.MobileServices.MobileServiceConflictException) { }
+                    ChangeToFoodPage(model);
+                   
                     /*image.Source = ImageSource.FromStream(() =>
                     {
                         var stream = file.GetStream();
