@@ -14,6 +14,9 @@ namespace Phase2Project
         [JsonProperty(PropertyName = "Emotion")]
         public string Emotion { get; set; }
 
+        [JsonProperty(PropertyName = "UpDateTime")]
+        public string updateTime { get; set; }
+
         [JsonProperty(PropertyName = "id")]
         public string id { get; set; }
     }

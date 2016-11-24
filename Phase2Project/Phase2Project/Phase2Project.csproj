@@ -36,8 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="AzureManager.cs" />
-    <Compile Include="EmotionModel.cs" />
+    <Compile Include="AzureManager\AzureManager.cs" />
+    <Compile Include="EmotionModel\EmotionModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

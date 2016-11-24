@@ -19,11 +19,20 @@ namespace Phase2Project
         FaceBookModel profile;
         public MainPage(FaceBookModel profile)
         {
-            this.profile = profile;
-            var name = profile.Name;
             InitializeComponent();
+            this.profile = profile;
+            var layout = new StackLayout { Padding = new Thickness(5, 10) };
+            this.Content = layout;
+            var label = new Label { Text = "Welcome "+profile.Name, TextColor = Color.FromHex("#77d065"), FontSize = 20 };
+            var button = new Button { Text = "Take a photo", BackgroundColor =Color.FromHex("A6E55E"), TextColor = Color.White, BorderRadius = 0};
+            button.Clicked += TakePicture_Clicked;
+            layout.Children.Add(label);
+            layout.Children.Add(button);
 
-
+        }
+        private async void ChangePage()
+        {
+            await Navigation.PushAsync(new MainPage(profile));
         }
         private async void TakePicture_Clicked(object sender, System.EventArgs e)
         {
@@ -41,7 +50,7 @@ namespace Phase2Project
                 var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                 {
                     DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front,
-                    Directory = "Moodify",
+                    Directory = "Phase2",
                     Name = $"{DateTime.UtcNow}.jpg",
                     CompressionQuality = 92
 
@@ -63,14 +72,14 @@ namespace Phase2Project
 
                     var temp = emotionResults[0].Scores;
                     
-                    EmotionView.ItemsSource = temp.ToRankedList();
+                    //EmotionView.ItemsSource = temp.ToRankedList();
                     var clientEmotion = temp.ToRankedList().First().Key;
 
                     EmotionModel emo = new EmotionModel()
                     {
                         Name = profile.Name,
                         Emotion = clientEmotion,
-                        id = profile.id
+                        updateTime = DateTime.Now.ToString()
                     };
                     try
                     {
