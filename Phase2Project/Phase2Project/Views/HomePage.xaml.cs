@@ -67,7 +67,9 @@ namespace Phase2Project
             {
                 Name = name,
                 id = id,
-                email = email
+                email = email,
+                gender = gender
+                
 
             };
             try

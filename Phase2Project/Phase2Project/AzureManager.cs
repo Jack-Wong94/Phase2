@@ -12,11 +12,13 @@ namespace Phase2Project
         private static AzureManager instance;
         private MobileServiceClient client;
         private IMobileServiceTable<FaceBookModel> profileTable;
+        private IMobileServiceTable<EmotionModel> emotionTable;
 
         private AzureManager()
         {
             this.client = new MobileServiceClient("http://phase2app.azurewebsites.net");
             this.profileTable = this.client.GetTable<FaceBookModel>();
+            this.emotionTable = this.client.GetTable<EmotionModel>();
         }
 
         public MobileServiceClient AzureClient
@@ -37,6 +39,10 @@ namespace Phase2Project
         public async Task AddTimeline(FaceBookModel timeline)
         {
             await this.profileTable.InsertAsync(timeline);
+        }
+        public async Task AddTimeLine(EmotionModel timeline)
+        {
+            await emotionTable.InsertAsync(timeline);
         }
         public async Task<List<FaceBookModel>> GetTimelines()
         {

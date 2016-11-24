@@ -6,21 +6,15 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 namespace Phase2Project
 {
-    public class FaceBookModel
+    public class EmotionModel
     {
         [JsonProperty(PropertyName = "Name")]
         public string Name { get; set; }
 
+        [JsonProperty(PropertyName = "Emotion")]
+        public string Emotion { get; set; }
+
         [JsonProperty(PropertyName = "id")]
         public string id { get; set; }
-
-        [JsonProperty(PropertyName = "email")]
-        public string email { get; set; }
-
-        [JsonProperty(PropertyName = "gender")]
-        public string gender { get; set; }
-
-        
-        
     }
 }
